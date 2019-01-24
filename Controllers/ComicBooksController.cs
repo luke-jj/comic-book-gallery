@@ -9,13 +9,20 @@ namespace comic_book_gallery
 {
     public class ComicBooksController : Controller
     {
-        public IActionResult Details()
+        public IActionResult Index()
         {
-            if (DateTime.Today.DayOfWeek == DayOfWeek.Thursday) {
-                return Redirect("/");
-            }
+            // return a ViewResult object
+            return View();
+        }
 
+        public IActionResult Info()
+        {
             return Content("Hello from the comic book store.");
+        }
+
+        public IActionResult Detail()
+        {
+            return View();
         }
     }
 }
