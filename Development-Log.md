@@ -86,3 +86,11 @@ namespace comic_book_gallery
 ```
 
 7. add new views + associated methods in the controller as desired
+
+
+
+
+
+8. Add all design files under the folder `~/wwwroot/` (.js, .css, .png)
+9. Add a Shared View as `~/Views/Shared/_Layout.cshtml`
+
