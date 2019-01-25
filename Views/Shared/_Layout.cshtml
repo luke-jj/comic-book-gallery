@@ -30,7 +30,7 @@
     @if(ViewBag.ShowBackBar != null && ViewBag.ShowBackBar) {
       <div class="backbar">
         <div class="container">
-          @Html.ActionLink("Return to List", "Index", null,
+          @Html.ActionLink("Return to List", "Index", null, "/",
           new { @class="btn btn-default"})
         </div>
       </div>
