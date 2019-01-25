@@ -12,7 +12,7 @@ namespace comic_book_gallery
     public class ComicBooksController : Controller
     {
         /*
-         * This data is referenced from `/Data/ComicBookRepository.cs`
+         * This data repository is created when the Controller is instantiated
          */
         private ComicBookRepository _comicBookRepository = null;
         public ComicBooksController() {
@@ -23,8 +23,10 @@ namespace comic_book_gallery
 
         public IActionResult Index()
         {
+            var comicBooks = _comicBookRepository.GetComicBooks();
+
             // return a ViewResult object
-            return View();
+            return View(comicBooks);
         }
 
         public IActionResult Info()

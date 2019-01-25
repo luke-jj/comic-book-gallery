@@ -29,6 +29,10 @@ namespace comic_book_gallery.Data
             // TODO: add two more comic books
         };
 
+        public ComicBook[] GetComicBooks() {
+            return _comicBooks;
+        }
+
         public ComicBook GetComicBook(int id)
         {
             ComicBook comicBookToReturn = null;

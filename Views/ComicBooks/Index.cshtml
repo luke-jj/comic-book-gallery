@@ -1,18 +1,20 @@
+@model comic_book_gallery.Models.ComicBook[]
+
 @{
-    ViewData["Title"] = "Comic Books Store";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Comic Books";
 }
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device=width">
-        <title>@ViewData["Title"]</title>
-    </head>
-    <body>
-        <div>
-            <h1>Welcome To The Comic Book Store</h1>
-            <p>WHY hello there</p>
+<h2>@ViewData["Title"]</h2>
+<p>WHY hello there</p>
+
+<div class="row">
+    @foreach (var comicBook in Model) {
+        <div class="col-md-3">
+            <h4>@comicBook.DisplayText</h4>
+            <img src="/Images/@comicBook.CoverImageFileName"
+                 alt="@comicBook.DisplayText"
+                 class="img-responsive">
         </div>
-    </body>
-</html>
+    }
+</div>
