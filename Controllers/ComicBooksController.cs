@@ -5,11 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using comic_book_gallery.Models;
+using comic_book_gallery.Data;
 
 namespace comic_book_gallery
 {
     public class ComicBooksController : Controller
     {
+        /*
+         * This data is referenced from `/Data/ComicBookRepository.cs`
+         */
+        private ComicBookRepository _comicBookRepository = null;
+        public ComicBooksController() {
+            _comicBookRepository = new ComicBookRepository();
+        }
+
+
+
         public IActionResult Index()
         {
             // return a ViewResult object
@@ -21,20 +32,17 @@ namespace comic_book_gallery
             return Content("Hello from the comic book store.");
         }
 
-        public IActionResult Detail()
+        /*
+         * `int?` means the `id` parameter is *nullable*. id may be = null
+         */
+        public IActionResult Detail(int? id)
         {
-            var comicBook = new ComicBook() {
-                SeriesTitle = "The Amazing Spider-Man",
-                IssueNumber = 700,
-                DescriptionHtml = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives... <strong>will Peter Parker?</strong></p>",
-                Artists = new Artist[] {
-                    new Artist() { Name = "Dan Slott", Role = "Script" },
-                    new Artist() { Name = "Humberto Ramos", Role = "Pencils" },
-                    new Artist() { Name = "Victor Olazaba", Role = "Inks" },
-                    new Artist() { Name = "Edgar Delgado", Role = "Colors" },
-                    new Artist() { Name = "Chris Eliopoulos", Role = "Letters"},
-                }
-            };
+            if (id == null) {
+                // `NotFound()` returns a 404 View to the caller
+                return NotFound();
+            }
+
+            var comicBook = _comicBookRepository.GetComicBook((int) id);
 
             return View(comicBook);
         }

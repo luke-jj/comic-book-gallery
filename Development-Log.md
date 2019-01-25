@@ -146,3 +146,50 @@ the relevant action and pass them to the view in the return statement.
             return View(comicBook);
         }
 ```
+
+Update the view to include the data passed to it. use a `@model` directive,
+and reference the passed object with `@Model.`
+
+
+
+
+14. Separate the data instantiation from the controller.
+create a `/Data` folder. create a new class called `/Data/ComicBookRepository.cs`
+cut and paste the data from the controller to the new class and create a
+getter method for individual data instances.
+
+```cs
+/*
+ * Typically repositories retrieve from and persist data to a database.
+ * Our data is currently embedded in our code.
+ */
+public class ComicBookRepository
+{
+    public static ComicBook[] _comicBooks = new ComicBook[] {
+        new ComicBook() {
+            SeriesTitle = "The Amazing Spider-Man",
+            IssueNumber = 700,
+            DescriptionHtml = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives... <strong>will Peter Parker?</strong></p>",
+            Artists = new Artist[] {
+                new Artist() { Name = "Dan Slott", Role = "Script" },
+                new Artist() { Name = "Humberto Ramos", Role = "Pencils" },
+                new Artist() { Name = "Victor Olazaba", Role = "Inks" },
+                new Artist() { Name = "Edgar Delgado", Role = "Colors" },
+                new Artist() { Name = "Chris Eliopoulos", Role = "Letters"},
+            }
+        }
+    };
+
+    public static ComicBook GetComicBook(int id)
+    {
+        ComicBook comicBookToReturn = null;
+        foreach(var comicBook in _comicBooks) {
+            if (comicBook.Id == id) {
+                comicBookToReturn = comicBook;
+                break;
+            }
+        }
+        return comicBookToReturn;
+    }
+}
+```
