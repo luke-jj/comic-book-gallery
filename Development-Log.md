@@ -91,6 +91,36 @@ namespace comic_book_gallery
 
 
 
-8. Add all design files under the folder `~/wwwroot/` (.js, .css, .png)
-9. Add a Shared View as `~/Views/Shared/_Layout.cshtml`
+8. Add all design files under the folder `/wwwroot/` (.js, .css, .png)
+9. Add a Shared View as `/Views/Shared/_Layout.cshtml`
 
+
+
+
+10. Add a datamodel for comic books under `/Models/ComicBook.cs`
+11. Add related subdatamodel for artists under `/Models/Artist.cs`
+```cs
+namespace ComicBookGallery.Models
+{
+    public class ComicBook
+    {
+        public int Id { get; set; }
+        public string SeriesTitle { get; set; }
+        public int IssueNumber { get; set; }
+        public string DescriptionHtml { get; set; }
+        public Artist[] Artists { get; set; }
+        public bool Favorite { get; set; }
+    }
+}
+```
+
+```cs
+namespace ComicBookGallery.Models
+{
+    public class Artist
+    {
+        public string Name { get; set; }
+        public string Role { get; set; }
+    }
+}
+```
